@@ -130,7 +130,8 @@ def trainImageFetch(images_id):
     for idx, image_id in tqdm(enumerate(images_id), total=images_id.shape[0]):
         image_path = '../data/train/images/' + image_id + '.png'
         mask_path = '../data/train/masks/' + image_id + '.png'
-
+        
+        print(os.listdir(image_path), os.listdir("../data/"), os.listdir("../"))
         image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE).astype(np.float32) / 255
         mask = cv2.imread(mask_path, cv2.IMREAD_GRAYSCALE).astype(np.float32) / 255
         image_train[idx] = image
