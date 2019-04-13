@@ -7,7 +7,7 @@ python3 train_cv.py \
 --pad_left 27 \
 --pad_right 27 \
 --batch_size 18 \
---epoch 200 \
+--epoch 60 \
 --snapshot 4 \
 --cuda True \
 --save_weight /workdir/phalanx/weights/ \
