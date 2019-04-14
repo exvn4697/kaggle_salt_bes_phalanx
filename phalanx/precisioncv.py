@@ -65,7 +65,7 @@ if __name__ == '__main__':
                             test_data,
                             shuffle=False,
                             batch_size=args.batch_size,
-                            num_workers=8,
+                            num_workers=4,
                             pin_memory=True)
 
         # Prediction with no TTA test data
@@ -88,7 +88,7 @@ if __name__ == '__main__':
                             test_data,
                             shuffle=False,
                             batch_size=args.batch_size,
-                            num_workers=8,
+                            num_workers=4,
                             pin_memory=True)
 
         salt.eval()
