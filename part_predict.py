@@ -124,4 +124,4 @@ if __name__ == '__main__':
     
     test = pd.DataFrame({'id': test_ids, 'rle_mask': rles})
 
-    test[['id', 'rle_mask']].to_csv('/', index=False)
+    test[['id', 'rle_mask']].to_csv('/workdir', index=False)
