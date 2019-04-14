@@ -82,32 +82,33 @@ if __name__ == '__main__':
             pred_null.append(pred)
 
         # Prediction with horizontal flip TTA test data
-        test_data = SaltDataset(image_test, mode='test', is_tta=True, fine_size=args.fine_size, pad_left=args.pad_left,
-                                pad_right=args.pad_right)
-        test_loader = DataLoader(
-                            test_data,
-                            shuffle=False,
-                            batch_size=args.batch_size,
-                            num_workers=0,
-                            pin_memory=True)
+        # test_data = SaltDataset(image_test, mode='test', is_tta=True, fine_size=args.fine_size, pad_left=args.pad_left,
+                                # pad_right=args.pad_right)
+        # test_loader = DataLoader(
+                            # test_data,
+                            # shuffle=False,
+                            # batch_size=args.batch_size,
+                            # num_workers=0,
+                            # pin_memory=True)
 
-        salt.eval()
-        for images in tqdm(test_loader, total=len(test_loader)):
-            images = images.to(device)
-            with torch.set_grad_enabled(False):
-                if args.model == 'res34v3':
-                    pred, _, _ = salt(images)
-                else:
-                    pred = salt(images)
-                pred = F.sigmoid(pred).squeeze(1).cpu().numpy()
-            pred = pred[:, args.pad_left:args.fine_size + args.pad_left, args.pad_left:args.fine_size + args.pad_left]
-            for idx in range(len(pred)):
-                pred[idx] = cv2.flip(pred[idx], 1)
-            pred_flip.append(pred)
+        # salt.eval()
+        # for images in tqdm(test_loader, total=len(test_loader)):
+            # images = images.to(device)
+            # with torch.set_grad_enabled(False):
+                # if args.model == 'res34v3':
+                    # pred, _, _ = salt(images)
+                # else:
+                    # pred = salt(images)
+                # pred = F.sigmoid(pred).squeeze(1).cpu().numpy()
+            # pred = pred[:, args.pad_left:args.fine_size + args.pad_left, args.pad_left:args.fine_size + args.pad_left]
+            # for idx in range(len(pred)):
+                # pred[idx] = cv2.flip(pred[idx], 1)
+            # pred_flip.append(pred)
 
         pred_null = np.concatenate(pred_null).reshape(-1, args.fine_size, args.fine_size)
-        pred_flip = np.concatenate(pred_flip).reshape(-1, args.fine_size, args.fine_size)
-        overall_pred += (pred_null + pred_flip) / 2
+        # pred_flip = np.concatenate(pred_flip).reshape(-1, args.fine_size, args.fine_size)
+        # overall_pred += (pred_null + pred_flip) / 2
+        overall_pred += (pred_null)
 
     overall_pred /= (args.end_snap - args.start_snap + 1)
 
