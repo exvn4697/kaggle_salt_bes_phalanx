@@ -109,9 +109,10 @@ if __name__ == '__main__':
         # pred_flip = np.concatenate(pred_flip).reshape(-1, args.fine_size, args.fine_size)
         # overall_pred += (pred_null + pred_flip) / 2
         overall_pred += (pred_null)
+        print("prediction", step, "done")
+    # overall_pred /= (args.end_snap - args.start_snap + 1)
 
-    overall_pred /= (args.end_snap - args.start_snap + 1)
-
+    print("Saving...")
     # Save prediction
     if args.fine_size != 101:
         overall_pred_101 = np.zeros((len(test_id), 101, 101), dtype=np.float32)
