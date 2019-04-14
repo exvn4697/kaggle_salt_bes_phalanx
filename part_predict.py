@@ -70,7 +70,7 @@ if __name__ == '__main__':
     test_ids = [x[:-4] for x in os.listdir('/test_data') if x[-4:] == '.png']
     
     rles = []
-    pred = read_phalanx_test('/workdir/phalanx/weights/model_256_res34v402.pth')
+    pred = read_phalanx_test('/workdir/phalanx/fold_predictions/res34v4_pred0.npy')
     threshold = 0.5
     for img_id in tqdm(test_ids):
         mask = pred[img_id] > threshold
